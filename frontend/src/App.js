@@ -16,6 +16,7 @@ function App() {
           <LoadingBar />
         <div className='container'>
           <Route path='/' exact component={Home} />
+          <Route path='/:category' exact component={Home} />
           <Route path='/post/:id' exact component={Post}/>
 
         </div>
