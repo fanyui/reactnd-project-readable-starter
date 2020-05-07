@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleGetCategory } from '../actions/category'
+import { handleReceivePosts } from '../actions/post'
 function Categories(props) {
+    const [category, setCategory] = useState("all")
     const dispatch = useDispatch()
     const counter = useSelector(state => state.category)
     useEffect(() => {
         dispatch(handleGetCategory())
     }, [])
-
+    useEffect(() => {
+        dispatch(handleReceivePosts(category))
+    },[category])
     return (
         <div>
             <nav className='nav'>

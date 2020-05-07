@@ -3,7 +3,7 @@ import { formatDate } from '../utils'
 import { Link } from 'react-router-dom'
 
 import { TiArrowForwardOutline, TiHeartOutline, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
-function Post(props) {
+function PostCard(props) {
     const [likes, setLikes] = useState(false)
     return (
         <div className="post-item">
@@ -28,10 +28,10 @@ function Post(props) {
                         }
                     </button>
                     <span>{props.post.voteScore}</span>
-                    <TiDeleteOutline color='#e0245e' onClick={() => {console.log("deleting")}} className='post-icon' />
+                    <TiDeleteOutline color='#e0245e' onClick={() => { console.log("deleting") }} className='post-icon' />
                 </div>
             </div>
         </div>
     )
 }
-export default Post
+export default PostCard

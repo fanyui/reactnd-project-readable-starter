@@ -1,19 +1,41 @@
-import { ADD_POST, REMOVE_POST} from '../constant'
-import { getPosts, createPost, deletPost } from '../api/post'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST } from '../constant'
+import { get_posts, createPost, deletPost} from '../api/post'
+import { showLoading, hideLoading } from 'react-redux-loading'
 function addPost(post) {
     return {
         type: ADD_POST,
         post,
     }
 }
+function receivePosts(posts) {
+    return {
+        type: RECEIVE_POST,
+        posts,
+    }
+}
 
-function removeGoal(id) {
+function removePost(id) {
     return {
         type: REMOVE_POST,
         id,
     }
 }
 
+export const handleReceivePosts = (category) =>{
+    return(dispatch) => {
+        dispatch(showLoading())
+        return get_posts(category)
+                .then(posts => {
+                    dispatch(receivePosts(posts))
+                    dispatch(hideLoading())
+
+                })
+                .catch(e => {
+                    dispatch(hideLoading())
+                    alert("something went wrong try again")
+            })
+    }
+}
 
 export function handleAddPost(name, cb) {
     return (dispatch) => {

@@ -1,15 +1,17 @@
 import { apiEndpoint } from '../config'
-export async function getPosts() {
-    console.log('Fetching Menus')
-    const response = await fetch(`${apiEndpoint}/post`,
+export async function get_posts(category) {
+    console.log('Fetching Posts')
+    const response = await fetch(`${apiEndpoint}/${category == "all" ? "posts" : category+"/posts"}`,
         {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
             },
         })
     const result = await response.json()
     return result
+    
 }
 
 export async function createPost(post){
