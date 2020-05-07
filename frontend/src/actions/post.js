@@ -53,14 +53,13 @@ export const handleReceivePosts = (category) =>{
     }
 }
 
-export function handleAddPost(name, cb) {
+export function handleAddPost(post) {
     return (dispatch) => {
-        return createPost(name)
-            .then((post) => {
-                dispatch(addPost(post))
-                cb()
+        return createPost(post)
+            .then((pst) => {
+                dispatch(addPost(ADD_POST, pst))
             })
-            .catch(() => alert('There was and error. Try again. '))
+            .catch((e) => alert('There was and error. Try again. '+e.message()))
     }
 }
 

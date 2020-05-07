@@ -9,7 +9,7 @@ export default function goals(state = [], action) {
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.post, action.post]
+                posts: [...state.posts, action.post]
             }
         case REMOVE_POST:
             return {

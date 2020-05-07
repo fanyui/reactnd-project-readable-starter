@@ -16,7 +16,7 @@ export async function get_posts(category) {
 
 export async function createPost(post){
 
-    const reply = await fetch(`${apiEndpoint}/post`,
+    const reply = await fetch(`${apiEndpoint}/posts`,
         {
             method: 'POST',
             headers: {
