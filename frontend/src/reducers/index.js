@@ -3,5 +3,6 @@ import {combineReducers} from 'redux'
 import post from './post'
 import loading from './loading'
 import comment from './comment'
+import category from './category'
 
-export default  combineReducers({post, loading, comment,}) 
+export default combineReducers({ post, loading, comment, category}) 
