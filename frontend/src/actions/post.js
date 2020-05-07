@@ -1,5 +1,5 @@
-import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST } from '../constant'
-import { get_posts, createPost, deletPost, get_post_details, vote_post} from '../api/post'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST, EDIT_POST } from '../constant'
+import { get_posts, createPost, deletPost, get_post_details, vote_post, edit_post} from '../api/post'
 import { showLoading, hideLoading } from 'react-redux-loading'
 function addPost(ActionType, post) {
     return {
@@ -11,6 +11,12 @@ function receivePosts(posts) {
     return {
         type: RECEIVE_POST,
         posts,
+    }
+}
+function editPost(post) {
+    return {
+        type: EDIT_POST,
+        post,
     }
 }
 
@@ -55,6 +61,16 @@ export function handleAddPost(name, cb) {
                 cb()
             })
             .catch(() => alert('There was and error. Try again. '))
+    }
+}
+
+export function handleEditPost(post, id) {
+    return (dispatch) => {
+        return edit_post(post, id)
+            .then((post) => {
+                dispatch(editPost(post))
+            })
+            .catch((e) => alert('There was and error. Try again. '+e))
     }
 }
 

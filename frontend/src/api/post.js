@@ -79,3 +79,19 @@ export async function vote_post(options, id) {
 
     return await reply.json()
 }
+export async function edit_post(post, id) {
+
+    const reply = await fetch(`${apiEndpoint}/posts/${id}`,
+        {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
+            },
+            body: JSON.stringify(post)
+        }
+    )
+
+    return await reply.json()
+}

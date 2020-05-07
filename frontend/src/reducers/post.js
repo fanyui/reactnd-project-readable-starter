@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST } from '../constant'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST, EDIT_POST } from '../constant'
 export default function goals(state = [], action) {
     switch (action.type) {
         case RECEIVE_POST:
@@ -27,6 +27,11 @@ export default function goals(state = [], action) {
             return {
                 ...state,
                 post: action.post
+            }
+        case EDIT_POST: 
+            return {
+                ...state,
+                posts: state.posts.map((post) => post.id === action.post.id ? action.post : post)
             }
         default:
             return state
