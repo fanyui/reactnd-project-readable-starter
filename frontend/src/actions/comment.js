@@ -1,5 +1,5 @@
-import { RECEIVE_COMMENTS, ADD_COMMENT, DELETE_COMMENT } from '../constant'
-import { get_comments, create_comment, delete_comment} from '../api/comment'
+import { RECEIVE_COMMENTS, ADD_COMMENT, DELETE_COMMENT, VOTE_COMMENT } from '../constant'
+import { get_comments, create_comment, delete_comment, vote_comment} from '../api/comment'
 function getComments(comments) {
     return {
         type: RECEIVE_COMMENTS,
@@ -17,6 +17,12 @@ function removeComment( id) {
     return {
         type: DELETE_COMMENT,
         id,
+    }
+}
+function vote(comment) {
+    return {
+        type: VOTE_COMMENT,
+        comment,
     }
 }
 export function handleCreateComment(comment) {
@@ -48,6 +54,20 @@ export function handleDeleteComment(comment) {
         return delete_comment(comment.id)
             .catch(() => {
                 dispatch(addComment(comment))
+                alert('An error occured. Try again. ')
+            })
+    }
+}
+export function handleVote(options, comment) {
+    return (dispatch) => {
+        // dispatch(removeComment(comment.id))
+
+        return vote_comment(options, comment.id)
+            .then((cmt) => {
+                dispatch(vote(cmt))
+            })
+            .catch(() => {
+                // dispatch(addComment(comment))
                 alert('An error occured. Try again. ')
             })
     }

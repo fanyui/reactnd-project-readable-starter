@@ -1,15 +1,21 @@
 import React, { useState } from "react"
 import { formatDate } from '../utils'
 import { TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
-import { handleDeleteComment} from '../actions/comment'
+import { handleDeleteComment, handleVote} from '../actions/comment'
 import { useDispatch } from "react-redux"
 
 function Comment(props) {
+    const [likes, setLikes] = useState(false)
     const dispatch = useDispatch()
     const onDelete = () => {
         dispatch(handleDeleteComment(props.comment))
     }
-    const [likes, setLikes] = useState(false)
+    const vote = () => {
+        let option = {
+            option:  likes ? "downVote" : "upVote"
+        }
+        dispatch(handleVote(option, props.comment))
+    }
     return (
         <div className="comments-section">
             <div className="post-info">
@@ -23,7 +29,7 @@ function Comment(props) {
                 <div className='post-icons'>
                     <span> {props.comment.author} </span>
 
-                    <button className='heart-button' onClick={() => setLikes(true)}  >
+                    <button className='heart-button' onClick={() => { setLikes(!likes); vote()}}  >
                         {likes === true ? <TiHeartFullOutline color='#e0245e' className='post-icon' />
                             :
                             <TiHeartFullOutline className='post-icon' />

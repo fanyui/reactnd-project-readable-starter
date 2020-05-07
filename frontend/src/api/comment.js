@@ -31,6 +31,22 @@ export async function create_comment(comment) {
 
     return await reply.json()
 }
+export async function vote_comment(options, id) {
+
+    const reply = await fetch(`${apiEndpoint}/comments/${id}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
+            },
+            body: JSON.stringify(options)
+        }
+    )
+
+    return await reply.json()
+}
 export async function delete_comment(id) {
 
     const reply = await fetch(`${apiEndpoint}/comments/${id}`,

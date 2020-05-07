@@ -1,5 +1,5 @@
-import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL } from '../constant'
-import { get_posts, createPost, deletPost, get_post_details} from '../api/post'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST } from '../constant'
+import { get_posts, createPost, deletPost, get_post_details, vote_post} from '../api/post'
 import { showLoading, hideLoading } from 'react-redux-loading'
 function addPost(ActionType, post) {
     return {
@@ -66,6 +66,26 @@ export function handleDeletePost(post) {
             .catch(() => {
                 dispatch(addPost(post))
                 alert('An error occured. Try again. ')
+            })
+    }
+}
+function vote(post) {
+    return {
+        type: VOTE_POST,
+        post,
+    }
+}
+export function handleVote(options, post) {
+    return (dispatch) => {
+        // dispatch(removePost(post.id))
+
+        return vote_post(options, post.id)
+            .then((cmt) => {
+                dispatch(vote(cmt))
+            })
+            .catch((e) => {
+                // dispatch(addPost(post))
+                alert('An error occured. Try again. '+e)
             })
     }
 }

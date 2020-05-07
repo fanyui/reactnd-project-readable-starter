@@ -1,10 +1,22 @@
 import React, { useState } from "react"
 import { formatDate } from '../utils'
 import { Link } from 'react-router-dom'
+import { handleDeletePost, handleVote } from '../actions/post'
+import { useDispatch } from "react-redux"
 
-import { TiArrowForwardOutline, TiHeartOutline, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
+import { TiArrowForwardOutline, TiEdit, TiHeartOutline, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
 function PostCard(props) {
     const [likes, setLikes] = useState(false)
+    const dispatch = useDispatch()
+    const onDelete = () => {
+        dispatch(handleDeletePost(props.post))
+    }
+    const vote = () => {
+        let option = {
+            option: likes ? "downVote" : "upVote"
+        }
+        dispatch(handleVote(option, props.post))
+    }
     return (
         <div className="post-item">
             <div className="post-info">
@@ -21,14 +33,15 @@ function PostCard(props) {
                         <TiArrowForwardOutline className='post-icon' />
                     </Link>
 
-                    <button className='heart-button' onClick={() => setLikes(true)}  >
+                    <button className='heart-button' onClick={() => { setLikes(!likes); vote()}}  >
                         {likes === true ? <TiHeartFullOutline color='#e0245e' className='post-icon' />
                             :
                             <TiHeartFullOutline className='post-icon' />
                         }
                     </button>
                     <span>{props.post.voteScore}</span>
-                    <TiDeleteOutline color='#e0245e' onClick={() => { console.log("deleting") }} className='post-icon' />
+                    <TiEdit  onClick={() => console.log("edit")} className='post-icon' />
+                    <TiDeleteOutline color='#e0245e' onClick={() => onDelete()} className='post-icon' />
                 </div>
             </div>
         </div>

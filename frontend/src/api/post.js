@@ -62,3 +62,20 @@ export async function deletPost(id){
     return await reply.json()
 }
 
+
+export async function vote_post(options, id) {
+
+    const reply = await fetch(`${apiEndpoint}/posts/${id}`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
+            },
+            body: JSON.stringify(options)
+        }
+    )
+
+    return await reply.json()
+}

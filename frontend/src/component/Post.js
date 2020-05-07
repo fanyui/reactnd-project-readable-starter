@@ -14,6 +14,7 @@ function Post(props) {
     const dispatch = useDispatch()
     const post = useSelector(state => state.posts)
     const comments = useSelector(state => state.comments)
+    const postLeft = 103 - body.length
 
     const addComment = () =>{
         let commentId = uuidv4();
@@ -35,12 +36,22 @@ function Post(props) {
     },[id])
     return (
         <div className="post-item">
+            {!post.post && <span> Post doesnot exist </span>}
+
             {post.post && <PostCard post={post.post} />}
             {console.log("comments are ", comments.comments)}
             <div className="create-form">
+                <h3 className='center'> Add Comment</h3>
+
                 <input className="input" type="text" placeholder="Author" name="authoer" onChange={(e)=> setAuthor(e.target.value)} />
                 <br />
-                <textarea placeholder="comment here" onChange={(e) => setBody(e.target.value)} className="textarea" maxLength={280} name="body" /> 
+                <textarea maxLength={280} placeholder="comment here" onChange={(e) => setBody(e.target.value)} className="textarea" maxLength={280} name="body" /> 
+                {postLeft <= 100 && (
+                    <div className='post-length'>
+                        {postLeft}
+
+                    </div>
+                )}
                 <button className="btn" onClick={() => addComment()}
                 > Comment
                 </button> 
