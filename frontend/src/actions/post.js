@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST, EDIT_POST } from '../constant'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL, VOTE_POST, EDIT_POST, SORT_POST } from '../constant'
 import { get_posts, createPost, deletPost, get_post_details, vote_post, edit_post} from '../api/post'
 import { showLoading, hideLoading } from 'react-redux-loading'
 function addPost(ActionType, post) {
@@ -102,5 +102,18 @@ export function handleVote(options, post) {
                 // dispatch(addPost(post))
                 alert('An error occured. Try again. '+e)
             })
+    }
+}
+
+export function handleSortPost(type, order) {
+    return (dispatch) => {
+        dispatch(sort({type, order}))
+    }
+}
+
+function sort(order){
+    return {
+        type: SORT_POST,
+        order
     }
 }

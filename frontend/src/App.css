@@ -21,6 +21,25 @@
   width: 250px;
   position: relative;
 }
+.btn-create {
+  text-transform: uppercase;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,.29);
+  cursor: pointer;
+  background: #fff;
+  font-size: 16px;
+  width: 250px;
+  position: relative;
+  align-self: flex-end;
+}
+.top-section {
+  display: flex ;
+  justify-content: flex-end;
+}
+.sort-lable {
+  padding: 10px;
+}
 
 .btn:hover {
   border-color: rgba(0,0,0,.5);
