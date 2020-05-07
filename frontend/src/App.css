@@ -67,7 +67,6 @@
 .post-icons {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
 }
 .post-icons > span {
   color: #969696;
@@ -96,6 +95,16 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+.comments-section {
+  width: 100%;
+  max-width: 590px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #2222;
+  margin-bottom: 10px;
+  border-radius: 3px
 }
 a {
   text-decoration: none;

@@ -1,9 +1,9 @@
-import { ADD_POST, REMOVE_POST, RECEIVE_POST } from '../constant'
-import { get_posts, createPost, deletPost} from '../api/post'
+import { ADD_POST, REMOVE_POST, RECEIVE_POST, POST_DETAIL } from '../constant'
+import { get_posts, createPost, deletPost, get_post_details} from '../api/post'
 import { showLoading, hideLoading } from 'react-redux-loading'
-function addPost(post) {
+function addPost(ActionType, post) {
     return {
-        type: ADD_POST,
+        type: ActionType,
         post,
     }
 }
@@ -19,6 +19,16 @@ function removePost(id) {
         type: REMOVE_POST,
         id,
     }
+}
+export const handleGetPostDetails = (id) => {
+    return(dispatch) => {
+        return get_post_details(id)
+            .then(post => {
+                dispatch(addPost(POST_DETAIL, post))
+            })
+            .catch(e => alert("error fetching post details"))
+    }
+    console.log("getting post details")
 }
 
 export const handleReceivePosts = (category) =>{

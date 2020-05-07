@@ -21,6 +21,8 @@ export async function createPost(post){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
             },
             body: JSON.stringify(post)
         }
@@ -28,13 +30,31 @@ export async function createPost(post){
 
     return await reply.json()
 }
+export async function get_post_details(id){
+
+    const reply = await fetch(`${apiEndpoint}/posts/${id}`,
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
+            },
+        }
+    )
+
+    return await reply.json()
+    
+}
 export async function deletPost(id){
 
-    const reply = await fetch(`${apiEndpoint}/post/${id}`,
+    const reply = await fetch(`${apiEndpoint}/posts/${id}`,
         {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'one-man-army'
+
             },
         }
     )

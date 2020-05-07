@@ -1,36 +1,39 @@
-import React, { useState } from "react"
-import { formatDate } from '../utils'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from "react"
+import {useParams} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux"
+import { handleGetPostDetails } from '../actions/post'
+import { handleGetComments } from '../actions/comment'
+import PostCard from "./PostCard"
+import Comment from "./Comment"
 
-import { TiArrowForwardOutline, TiHeartOutline, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
 function Post(props) {
-    const [likes, setLikes] = useState(false)
+    let {id } = useParams()
+    const [ body, setBody] = useState("")
+    const dispatch = useDispatch()
+    const post = useSelector(state => state.posts)
+    const comments = useSelector(state => state.comments)
+
+    const addComment = () =>{
+        console.log("adding comment")
+    }
+    useEffect(() => {
+        dispatch(handleGetPostDetails(id))
+        dispatch(handleGetComments(id))
+    },[id])
     return (
         <div className="post-item">
-            <div className="post-info">
-                <div>
-                    <span> {props.post.title} </span>
-                    <div> {formatDate(props.post.timestamp)} </div>
-                    <p> {props.post.body}
-
-                    </p>
-                </div>
-                <div className='post-icons'>
-                    <span> {props.post.author} </span>
-                    <Link to={`/post/${props.post.id}`} >
-                        <TiArrowForwardOutline className='post-icon' />
-                    </Link>
-
-                    <button className='heart-button' onClick={() => setLikes(true)}  >
-                        {likes === true ? <TiHeartFullOutline color='#e0245e' className='post-icon' />
-                            :
-                            <TiHeartFullOutline className='post-icon' />
-                        }
-                    </button>
-                    <span>{props.post.voteScore}</span>
-                    <TiDeleteOutline color='#e0245e' onClick={() => {console.log("deleting")}} className='post-icon' />
-                </div>
-            </div>
+            {post.post && <PostCard post={post.post} />}
+            {console.log("comments are ", comments.comments)}
+            <div className="create-form">
+                <textarea placeholder="comment here" onChange={(e) => setBody(e.target.value)} className="textarea" maxLength={280} name="body"> </textarea>
+                <button className="btn" onClick={() => addComment()}
+                > Comment
+                </button> 
+            </div>           
+            {comments && comments.comments &&  comments.comments.map((cmt, key) =>
+             <Comment comment={cmt}  key={key}/> 
+            
+            )}
         </div>
     )
 }

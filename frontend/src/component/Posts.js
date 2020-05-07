@@ -7,7 +7,7 @@ function Posts(props) {
     useEffect(() => {
     }, [])
     return (
-        <div className="restaurant">
+        <div className="post">
             {console.log("counter post is ", counter.posts)}
             {counter && counter.posts && counter.posts.map((elt, idex) => <PostCard key={idex} post={elt} />)}
 

@@ -5,7 +5,8 @@ import LoadingBar from 'react-redux-loading'
 
 import './App.css';
 import Home from './Home'
-import Categories from '../src/component/Categories'
+import Categories from './component/Categories'
+import Post from './component/Post'
 function App() {
 
   return (
@@ -15,6 +16,7 @@ function App() {
           <LoadingBar />
         <div className='container'>
           <Route path='/' exact component={Home} />
+          <Route path='/post/:id' exact component={Post}/>
 
         </div>
         </>
