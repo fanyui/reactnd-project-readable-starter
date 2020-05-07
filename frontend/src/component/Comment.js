@@ -1,7 +1,14 @@
 import React, { useState } from "react"
 import { formatDate } from '../utils'
 import { TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
+import { handleDeleteComment} from '../actions/comment'
+import { useDispatch } from "react-redux"
+
 function Comment(props) {
+    const dispatch = useDispatch()
+    const onDelete = () => {
+        dispatch(handleDeleteComment(props.comment))
+    }
     const [likes, setLikes] = useState(false)
     return (
         <div className="comments-section">
@@ -23,7 +30,7 @@ function Comment(props) {
                         }
                     </button>
                     <span>{props.comment.voteScore}</span>
-                    <TiDeleteOutline color='#e0245e' onClick={() => { console.log("deleting") }} className='post-icon' />
+                    <TiDeleteOutline color='#e0245e' onClick={() => onDelete()} className='post-icon' />
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { RECEIVE_COMMENTS } from '../constant'
+import { RECEIVE_COMMENTS, ADD_COMMENT, DELETE_COMMENT } from '../constant'
 
 export default function comments(state = [], action) {
     switch (action.type) {
@@ -10,6 +10,16 @@ export default function comments(state = [], action) {
             return {
                 ...state,
                 comments: action.comments
+            }
+        case ADD_COMMENT: 
+        return {
+            ...state,
+            comments: [...state.comments, action.comment]
+        }
+        case DELETE_COMMENT:
+            return {
+                ...state,
+                comments: state.comments.filter((cmt) => cmt.id !== action.id)
             }
         default:
             return state
