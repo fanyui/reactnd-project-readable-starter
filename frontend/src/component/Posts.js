@@ -8,14 +8,17 @@ function Posts(props) {
     const dispatch = useDispatch()
     const [isNew, setIsNew] = useState(false)
     const [voteOrder, setVoteOrder] = useState("default")
-    const [timeOrder, setTimeOrder] = useState("asc")
+    const [timeOrder, setTimeOrder] = useState("default")
     const counter = useSelector(state => state.posts)
     useEffect(() => {
 
         // dispatch(handleSortPost("time", timeOrder))
        voteOrder !== "default" && dispatch(handleSortPost("vote", voteOrder))
 
-    }, [voteOrder, timeOrder])
+    }, [voteOrder])
+    useEffect(() => {
+        timeOrder !== "default" && dispatch(handleSortPost("time", timeOrder))
+    }, [timeOrder])
     return (
         <div className="post">
             { isNew? 

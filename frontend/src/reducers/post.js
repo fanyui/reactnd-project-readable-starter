@@ -40,17 +40,27 @@ export default function goals(state = [], action) {
             }
         default:
             return state
-    }
+}
 }
 
 function sortThem(arr, sortOrder) {
     console.log("sorting")
     let clone = [...arr]
-    if(sortOrder.order == 'asc'){
-        clone.sort((a, b) => (a.voteScore > b.voteScore) ? 1 : ((b.voteScore > a.voteScore) ? -1 : 0))
+    if(sortOrder.type == "vote"){
+        if (sortOrder.order == 'asc') {
+            clone.sort((a, b) => (a.voteScore > b.voteScore) ? 1 : ((b.voteScore > a.voteScore) ? -1 : 0))
+        }
+        else {
+            clone.sort((a, b) => (a.voteScore < b.voteScore) ? 1 : ((b.voteScore < a.voteScore) ? -1 : 0))
+        }
     }
     else{
-        clone.sort((a, b) => (a.voteScore < b.voteScore) ? 1 : ((b.voteScore < a.voteScore) ? -1 : 0))
+        if (sortOrder.order == 'asc') {
+            clone.sort((a, b) => (+a.timestamp > +b.timestamp) ? 1 : ((+b.timestamp > +a.timestamp) ? -1 : 0))
+        }
+        else {
+            clone.sort((a, b) => (+a.timestamp < +b.timestamp) ? 1 : ((+b.timestamp < +a.timestamp) ? -1 : 0))
+        }
     }
     return clone;
 }
