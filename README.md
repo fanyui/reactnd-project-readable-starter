@@ -18,7 +18,7 @@ then `cd reactnd-project-readable-starter`
     - `cd frontend`
     - `npm install`
     - `npm start`
-* Visit the url http://localhost:3000 on your browser and you will fnd the applicaton runnng.
+* Visit the url [Local Host](http://localhost:3000) on your browser and you will fnd the applicaton runnng.
 
 ## API Server
 
