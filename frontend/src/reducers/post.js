@@ -31,6 +31,7 @@ export default function goals(state = [], action) {
         case EDIT_POST: 
             return {
                 ...state,
+                post: action.post,
                 posts: state.posts.map((post) => post.id === action.post.id ? action.post : post)
             }
         case SORT_POST: 
