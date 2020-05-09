@@ -16,7 +16,7 @@ function NewPost(props) {
     const submit = () => {
         let id = uuidv4();
         let post = {
-            timestamp: new Date(),
+            timestamp: new Date().getTime(),
             author,
             id,
             title,

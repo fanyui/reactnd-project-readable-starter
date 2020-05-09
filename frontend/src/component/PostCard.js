@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { handleDeletePost, handleVote } from '../actions/post'
 import { useDispatch } from "react-redux"
 
-import { TiArrowForwardOutline, TiEdit, TiHeartOutline, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
+import { TiArrowForwardOutline, TiEdit, TiMessages, TiHeartFullOutline, TiDeleteOutline } from 'react-icons/ti'
 import EditPost from "./EditPost"
 function PostCard(props) {
     const [likes, setLikes] = useState(false)
@@ -53,6 +53,7 @@ function PostCard(props) {
                         <span>{props.post.voteScore}</span>
                         <TiEdit  onClick={() => setEditing(props.post.id)} className='post-icon' />
                         <TiDeleteOutline color='#e0245e' onClick={() => onDelete()} className='post-icon' />
+                                <TiMessages className='post-icon' />{props.post.commentCount}
                     </div>
                 </div>
             </div>

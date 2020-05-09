@@ -102,6 +102,8 @@
 .post-icon {
   font-size: 27px;
   color: #697784;
+    padding: 10px;
+
 }
 .post-icon:hover {
   color: #00b5d6;
