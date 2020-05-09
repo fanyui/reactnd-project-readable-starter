@@ -40,7 +40,7 @@ function PostCard(props) {
                     </div>
                     <div className='post-icons'>
                         <span> {props.post.author} </span>
-                        <Link to={`/post/${props.post.id}`} >
+                        <Link to={`/${props.post.category}/${props.post.id}`} >
                             <TiArrowForwardOutline className='post-icon' />
                         </Link>
 

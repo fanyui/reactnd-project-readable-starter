@@ -5,6 +5,7 @@ import { handleGetPostDetails } from '../actions/post'
 import { handleGetComments, handleCreateComment } from '../actions/comment'
 import PostCard from "./PostCard"
 import Comment from "./Comment"
+import Err404 from "./Err404"
 import { v4 as uuidv4 } from 'uuid';
 
 function Post(props) {
@@ -36,8 +37,8 @@ function Post(props) {
     },[id])
     return (
         <div className="post-item">
-            {!post.post && <span> Post doesnot exist </span>}
-
+            {(post.post && post.post.error) ? <Err404 /> :
+            <>
             {post.post && <PostCard post={post.post} />}
             {console.log("comments are ", comments.comments)}
             <div className="create-form">
@@ -60,6 +61,8 @@ function Post(props) {
              <Comment comment={cmt}  key={key}/> 
             
             )}
+            </>
+            }
         </div>
     )
 }
